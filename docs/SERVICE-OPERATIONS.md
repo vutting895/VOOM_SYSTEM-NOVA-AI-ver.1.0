@@ -154,7 +154,11 @@ Do not display synthetic metrics as production telemetry.
 
 No production secret creation, paid infrastructure provisioning, or broker execution activation without explicit owner approval.
 
-## 10. Service readiness checklist
+## 10. AI-managed Operations Center
+
+The production operating model is extended by [`OPERATIONS-AUTOMATION.md`](./OPERATIONS-AUTOMATION.md). AI agents may observe, correlate, triage, create tickets, report and execute only explicitly allowlisted reversible low-risk runbooks after acceptance tests pass. Production deployments, schema/RLS/grant changes, secrets, customer data operations, billing/access changes, broker/risk changes and all trading execution changes require scoped Owner approval. Emergency containment is limited to pre-authorized, narrow, audited kill switches. Until the policy and technical acceptance gates pass, agents remain in Observe / Recommend mode; documentation does not imply runtime automation is active.
+
+## 11. Service readiness checklist
 
 - [ ] Authentication, tenant isolation and RLS pass.
 - [ ] Customer onboarding and connection revocation pass.
