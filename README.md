@@ -13,9 +13,14 @@ The two repositories have independent branches, CI, release tags, deployment con
 secrets, and release evidence. Changes in the development repository do not automatically
 change this product repository.
 
-Only source code and assets that pass the v1.0 intake review and have reproducible,
+Only source code and assets that are COMPLETE in the development repository and have reproducible,
 inspectable test evidence may be imported. Do not copy the whole development repository,
-unreviewed branches, mock UI data, fabricated metrics, credentials, or environment files.
+unverified work-in-progress, mock UI data, fabricated metrics, credentials, or environment files.
+
+The daily operating process is to inspect the canonical development repository, identify completed
+work relevant to this product plan, independently verify its implementation and test evidence, and
+bring accepted components directly into this product repository. Incomplete or failing work remains
+in the development repository and is not imported.
 
 ## Product scope
 
@@ -76,11 +81,10 @@ prompt, a model response, or a configuration supplied by an untrusted client.
 1. Inspect the exact source branch/commit in the development repository.
 2. Verify PR review, ancestry, exact-head CI, tests, security boundaries, and known limitations.
 3. Reject mock/sample/fabricated data and any code with unverified production claims.
-4. Import only the reviewed files/commits into a dedicated v1.0 feature branch.
-5. Run the target repository's own typecheck, unit/contract/integration tests, build, and security
-   checks. Upstream CI is supporting evidence, not a substitute for target-repository validation.
-6. Validate staging with isolated test tenants and non-production broker accounts.
-7. Promote only an immutable, tagged release with deployment, rollback, and operational evidence.
+4. Import accepted, complete components directly into the product repository's stable branch; do not inherit the development repository's feature-branch, Draft PR, or development-tracker rules.
+5. Run the product-level compatibility, security, and regression checks relevant to the imported component. Upstream CI is supporting evidence, not a substitute for product validation.
+6. Validate staging with isolated test tenants and non-production broker accounts when the component changes customer data, authentication, AI decisions, or broker connectivity.
+7. Keep the product repository usable and coherent after each accepted import; record the source SHA, component scope, test evidence, limitations, and release notes.
 
 ## Initial acceptance gates
 
@@ -96,10 +100,14 @@ prompt, a model response, or a configuration supplied by an untrusted client.
 - [ ] Staging acceptance, rollback rehearsal, and production operations checks complete.
 - [ ] Production release explicitly approved by the owner.
 
-## Repository rules
+## Product repository operating model
 
-- This repository is the release candidate/product source for NOVA v1.0.
-- Never use the development repository's `main` as a deployable release without this intake process.
+- This repository is the standalone NOVA v1.0 product source, not a development sandbox or mirror of the source repository.
+- The development repository is checked daily for completed, relevant, verified components.
+- Accepted components are integrated into this repository's stable product line; the source repository's mandatory feature-branch, Draft PR, and development-tracker workflow does not automatically apply here.
+- Keep a clear provenance record for every imported component: source repository, source SHA/PR, paths, verification evidence, target commit, and known limitations.
+- Do not import work-in-progress, failed, mock, or unverified components.
+- Never use the development repository's `main` as a deployable release without this product intake process.
 - Never mark a feature DONE without exact commit + test evidence.
 - Never store API keys, broker passwords, private keys, service-role keys, or production secrets
   in Git, issues, logs, test fixtures, or AI prompts.
@@ -108,5 +116,4 @@ prompt, a model response, or a configuration supplied by an untrusted client.
 
 ## Current status
 
-Only repository initialization and product/release boundaries are established. The application
-and AI Trading Controller still require source intake, implementation, and full verification.
+Product operating documentation and the daily source-intake process are established. The actual customer application and AI Trading Controller are not yet verified as runnable; this repository must not be represented as customer-ready until those product capabilities have been imported and verified.
