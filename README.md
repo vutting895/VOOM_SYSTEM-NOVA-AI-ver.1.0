@@ -114,6 +114,10 @@ prompt, a model response, or a configuration supplied by an untrusted client.
 - Preserve customer data isolation across every API, worker, queue, cache, object, and database query.
 - Keep Affiliate and NOVA Video projects outside this repository.
 
+## Operations and autonomous maintenance
+
+The production service model and AI-managed Operations Center policy are documented in [`docs/SERVICE-OPERATIONS.md`](docs/SERVICE-OPERATIONS.md) and [`docs/OPERATIONS-AUTOMATION.md`](docs/OPERATIONS-AUTOMATION.md). AI autonomy is bounded by deterministic policy enforcement and explicit Owner approval for high-risk actions. Until implementation and acceptance gates pass, agents must remain in Observe / Recommend mode.
+
 ## Current status
 
 Product operating documentation and the daily source-intake process are established. The actual customer application and AI Trading Controller are not yet verified as runnable; this repository must not be represented as customer-ready until those product capabilities have been imported and verified.
