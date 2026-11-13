@@ -3,7 +3,7 @@
 **Status:** IN PROGRESS — review required before import  
 **Development source:** `vutting895/VOOM_SYSTEM-NOVA-AI`  
 **Inspected source main:** `b3ba15c4e8eafc9ee839cb95d42865a0b193e114`  
-**Target branch:** `feature/v1.0-source-intake`
+**Target:** `main` — Production stable branch; accepted components are integrated directly under the Production repository's own controls, without inheriting Developer branch/PR rules.
 
 This register separates reusable implementation from design-only, prototype, blocked, and unsafe material. "Tested upstream" does not mean production-ready. Every imported component must pass target-repository CI and security review.
 
@@ -48,3 +48,43 @@ This register separates reusable implementation from design-only, prototype, blo
 A component may move from Candidate to Imported only after its packet is complete. It may move from Imported to Accepted only after the target repository's exact-head CI and required staging tests pass. A customer-facing production feature is not Done until deployment and operational checks pass.
 
 Never enable broker writes or Live Trading as part of source intake.
+
+
+---
+
+## Daily product intake audit — 2026-11-13
+
+**Repository snapshots**
+- Developer `main`: `b3ba15c4e8eafc9ee839cb95d42865a0b193e114`
+- Production `main` before this audit note: `6758dd15fa9ea9a1f86fea2be3f36a3c6567f9cb`
+
+**Current source baseline**
+- Developer main combined status is not green: CircleCI Pipeline = error; Vercel MT5 read-only bridge = failure; Vercel MCP server and two individual CircleCI jobs = success. These checks do not establish an all-green build.
+- Developer main branch metadata reports `protected=false`; required status checks are disabled.
+- Production main currently has no reported commit status checks and branch metadata reports `protected=false`.
+- Production currently has product/operations documentation but no application runtime, customer authentication implementation, MT5 integration, AI Controller runtime, or deployable product evidence verified by this audit.
+
+**Candidate classifications**
+| Candidate | Classification | Product intake decision |
+|---|---|---|
+| Main commit adding Google Workspace export and Independent Audit UI | MOCK/UNVERIFIED | HOLD. Open PR #314 explicitly documents fabricated fallback file content, hard-coded OOS metrics, placeholder hashes/run IDs and unverified evidence labels; do not import these views. |
+| PR #314 unverified evidence UI containment | INCOMPLETE | HOLD. Open Draft PR; exact-head validation and preview required. |
+| PR #316 atomic MT5 capacity reservation | INCOMPLETE / BLOCKED | HOLD. Open Draft PR; PostgreSQL 16 multi-session concurrency evidence and staging proof required; no hosted migration. |
+| PR #315 Risk Governor proposal contract | INCOMPLETE / POLICY CONFLICT | HOLD. Open Draft PR; local 16-test claim is not hosted exact-head proof. Proposed 1% single-trade risk must be reconciled with existing policy before integration. |
+| PR #308 SMC Mean Rejection | RESEARCH-ONLY / FAILED-VALIDATION | HOLD. Open Draft PR; research simulator and strategy require reproducible cost-aware walk-forward and sealed OOS evidence. |
+| PR #313 SMC fixture correction | INCOMPLETE | HOLD. Stacked on #308; local synthetic unit tests do not validate a strategy or independent production component. |
+| Latest merged PR candidates #293, #274, #272, #273 | NOT ACCEPTED FOR THIS PRODUCT INTAKE | No component-level production acceptance packet and target-side validation established in this run. |
+| Root frontend / Firebase additions | BLOCKED / ARCHITECTURE REVIEW | Do not transplant. Source root mixes Vite, Supabase and Firebase dependencies; Product architecture and target runtime are not yet implemented or reconciled. |
+
+**Import result:** ไม่มีการนำเข้าในรอบนี้.
+
+**Why no import:** The source main CI is not green, key current candidates are open Draft PRs or research-only, source and product architecture are not yet reconciled, and the Production repository has no target application/test runtime with which to verify compatibility and regression behavior.
+
+**Required next actions**
+1. Establish the Production app foundation and its own reproducible CI/build/test checks before importing runtime code.
+2. Reconcile the target frontend and backend architecture with the source's actual Vite/Supabase/Firebase composition; do not copy competing frontend stacks or project configuration blindly.
+3. Require exact-head executed CI and inspect job steps/logs for source candidates, especially #314–#316.
+4. Resolve risk-policy conflicts and verify tenant/account ownership and PostgreSQL concurrency before considering MT5 reservation or Risk Governor components.
+5. Keep MT5 read-only and all broker execution flags disabled.
+
+**Automation performed:** GitHub read-only inspection and this Production documentation update only. No code import, deployment, migration, secret change, customer-data change, broker action, or autonomous recovery action was performed.
