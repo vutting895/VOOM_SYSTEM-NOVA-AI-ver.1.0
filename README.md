@@ -106,6 +106,14 @@ prompt, a model response, or a configuration supplied by an untrusted client.
 - Preserve customer data isolation across every API, worker, queue, cache, object, and database query.
 - Keep Affiliate and NOVA Video projects outside this repository.
 
+## Project and service documentation
+
+- [Detailed execution plan](docs/PROJECT-EXECUTION-PLAN.md)
+- [Go-to-market and marketing strategy](docs/GO-TO-MARKET.md)
+- [Service delivery and operations model](docs/SERVICE-OPERATIONS.md)
+- [Product scope and customer workflow](docs/PRODUCT-SCOPE.md)
+- [Source intake register](docs/SOURCE-INTAKE.md)
+
 ## Current status
 
 Only repository initialization and product/release boundaries are established. The application
