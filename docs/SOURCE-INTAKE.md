@@ -88,3 +88,38 @@ Never enable broker writes or Live Trading as part of source intake.
 5. Keep MT5 read-only and all broker execution flags disabled.
 
 **Automation performed:** GitHub read-only inspection and this Production documentation update only. No code import, deployment, migration, secret change, customer-data change, broker action, or autonomous recovery action was performed.
+
+
+## Daily product intake audit — 2026-11-14
+
+**Run timestamp:** 2026-11-14 17:22:48 Asia/Bangkok  
+**Developer source main:** `a54e4b3b9a347502cf031d8bc064b89c5c0e5e80`  
+**Production main before this register update:** `ba4fd063432d0c915235afb57cfe75affc0dab96`  
+**Decision:** IN PROGRESS — no source component met the complete import and target-validation gates.
+
+### Source changes and exact evidence
+- The two commits after the previous recorded source baseline, [`32ccdcc`](https://github.com/vutting895/VOOM_SYSTEM-NOVA-AI/commit/32ccdccfc0c80cc076d708e4e332ac368b89ad69) and [`a54e4b3`](https://github.com/vutting895/VOOM_SYSTEM-NOVA-AI/commit/a54e4b3b9a347502cf031d8bc064b89c5c0e5e80), modify only `colab/nova-auto-learning/NOVA_Colab_Runtime_Preflight.ipynb`. The current notebook is a preflight/audit notebook, not a training pipeline: training is explicitly disabled and it contains no model-fit, market-data ingestion, broker call, or artifact-upload step.
+- The notebook's committed output records **Google Drive Mounted: False**, model discovery **NOT FOUND**, dataset validation **BLOCKED (7,419-hour gap reported)**, and feature schema **NOT VERIFIED**. These are saved notebook outputs, not a fresh live query of the user's Drive. [Notebook](https://github.com/vutting895/VOOM_SYSTEM-NOVA-AI/blob/a54e4b3b9a347502cf031d8bc064b89c5c0e5e80/colab/nova-auto-learning/NOVA_Colab_Runtime_Preflight.ipynb)
+- Current source main combined status: CircleCI Pipeline = `error`; Vercel MT5 read-only bridge = `failure`; Vercel MCP server = `success`. Vercel contexts are not Netlify production acceptance.
+- Current source main also has a failed Supabase Preview check: `Remote migration versions not found in local migrations directory.` No migration was attempted. The scheduled Kaggle ingestion run [`43570442286`](https://github.com/vutting895/VOOM_SYSTEM-NOVA-AI/actions/runs/43570442286) failed; its job had no steps and no retrievable log.
+- Current main GitHub Actions history's latest Frontend CI run [`43201808479`](https://github.com/vutting895/VOOM_SYSTEM-NOVA-AI/actions/runs/43201808479) targets the prior source SHA `b3ba15c4e8eafc9ee839cb95d42865a0b193e114`, failed with no steps/logs, and its production smoke job was skipped. The two latest notebook-only commits did not produce a new Frontend CI run.
+
+### Candidate decisions
+- **PR #322 — INCOMPLETE / BLOCKED:** current head `f3bef16fc0ee2049a3b58c47bba30953fc6c3cc9`, base `b3ba15c4e8eafc9ee839cb95d42865a0b193e114`, therefore behind current main by the two notebook commits. Exact-head runs [Windows Runtime](https://github.com/vutting895/VOOM_SYSTEM-NOVA-AI/actions/runs/43569405330), [MT5 Contract](https://github.com/vutting895/VOOM_SYSTEM-NOVA-AI/actions/runs/43569405556), [SMC Research](https://github.com/vutting895/VOOM_SYSTEM-NOVA-AI/actions/runs/43569405489), and [Frontend CI](https://github.com/vutting895/VOOM_SYSTEM-NOVA-AI/actions/runs/43569405318) all failed within seconds; each inspected job had an empty step list and logs returned BlobNotFound. Supabase Preview was skipped. No hosted tests passed. The PR remains Draft with no submitted review. The local MetaEditor comment reports 0 errors/0 warnings, but the EX5 binary SHA is missing and the v2.002 EA is not evidenced attached to a chart; Controller/contract runtime remains unverified. No import.
+- **PR #321 — INCOMPLETE:** fail-closed backtest endpoint is a useful containment change, but it is stacked on #318 and has no exact-head runtime-test proof. No import.
+- **PR #318 — INCOMPLETE / BLOCKED:** removes fabricated telemetry/training/Drive fallback claims and fails unavailable services closed; exact-head Frontend CI failed and logs were not available. Keep unavailable panels unavailable; no import.
+- **PR #319 — RESEARCH-ONLY:** 17 Windows local contract tests are reported passing, but no trained/calibrated OOF evidence, no integrated SMC adapter, no walk-forward/backtest evidence, and hosted CircleCI is error. No import.
+- **PR #315 — INCOMPLETE / POLICY CONFLICT:** proposal validator only; 16 local tests are reported, but no persistent idempotency/reservation or broker integration. Its 1% per-trade proposal remains unresolved against the conflicting 5% proposal; no risk policy activation.
+- **PR #316 — INCOMPLETE / BLOCKED:** PostgreSQL multi-session concurrency workflow is proposed, but exact-head hosted execution and disposable-database evidence are not available. No hosted migration.
+- **PR #314 — INCOMPLETE:** removal of unverified Drive/Audit routes is a containment proposal; exact-head route/build validation remains unproven.
+- **PRs #308/#313 and #238 — RESEARCH-ONLY / BLOCKED:** SMC remains unvalidated; #238 still reports 12,733 rows and 18 unexplained gaps including the 7,419-hour outage, with `training_eligible=false`. No training or promotion.
+- Recent merged PRs reviewed include #293, #274, #273, #272, #268, #255, #249, #248, #247, #245, #242 and #211. These are corrective revert, UI/research workspace, Developer-only CI/proof tooling, documentation/preflight, research primitives, secret-gated ingestion, or app-coupled safety code. Merge alone does not satisfy Production compatibility or target-side tests. None qualifies for import.
+
+### Production target and readiness
+- Production `main` contains only `README.md` and `docs/` (Product Scope, Execution Plan, Service Operations, Operations Automation, Go-to-Market and Source Intake). No application source, package manifest, backend, integrations, Supabase migrations, or CI workflow exists in the target tree. Production check-runs and Actions runs are empty; this is absence of validation, not a passing build.
+- Product remains **NOT PRODUCTION READY**. Customer app/auth/tenant runtime, AI Chat/Controller, Quant service, deterministic Risk Governor, MT5 read-only adapter, durable event/audit runtime, support/monitoring, backup/restore and deployable build remain unimplemented or unverified in this repository.
+- [Issue #48](https://github.com/vutting895/VOOM_SYSTEM-NOVA-AI/issues/48) remains open: Leaked Password Protection is disabled on the Supabase Free plan and cross-customer regression evidence is incomplete. No upgrade or billing change is authorized.
+- AI Operations Center remains a documented policy only. Keep Observe/Recommend; no operational agent runtime or autonomous recovery action is evidenced.
+
+### Intake result and safety
+**ไม่มีการนำเข้าในรอบนี้.** No component passed exact-source checks, security/tenant review, compatibility review and target-side regression validation. No Developer files were changed. No deploy, paid resource, migration, RLS/grant/auth change, secret change, customer-data action, training, controller start, or broker write was performed. Preserve `ordersEnabled=false`, `executionEnabled=false`, and `liveTradingEnabled=false`.
