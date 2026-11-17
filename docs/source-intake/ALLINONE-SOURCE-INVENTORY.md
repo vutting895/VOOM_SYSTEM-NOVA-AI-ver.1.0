@@ -10,7 +10,7 @@
 
 - ALLINONE main observed at `a37390cd157d7e8f3d19160a37b18bc421bbca68`.
 - The repository contains a legacy/demo snapshot with `index.html`, `server.js`, `package.json`, `vercel.json`, `README-DEPLOY.md`, and `.gitignore`.
-- A separate feature branch `feature/nova-service-api-integration` and Draft PR #1 were found. The PR describes a more recent authenticated NOVA adapter, read-only Exness Demo integration, NOVA AI research routes, and order-endpoint denial. Exact branch head and all changed-file provenance still require final verification before import.
+- A separate feature branch `feature/nova-service-api-integration` and Draft PR #1 were found. Comparing it with main reports 21 commits ahead and 0 behind, with six changed files: `README-DEPLOY.md` (modified, +50/-9), `api/server.js` (added, +226), `index.html` (modified, +299/-1), `package.json` (modified, +7/-2), `test/server.test.js` (added, +183), and `vercel.json` (modified, +8/-2). The connector did not expose the feature branch head SHA in the compare response; capture it directly before any import. The PR describes a more recent authenticated NOVA adapter, read-only Exness Demo integration, NOVA AI research routes, and order-endpoint denial.
 - The repository's default branch and feature branch are materially different. Do not treat the default-branch demo snapshot as the complete integration candidate.
 
 ## 2. Main-branch findings
@@ -56,7 +56,7 @@ Before acceptance:
 - No MQL5 source tree has been verified in the target candidate.
 - No verified compiled EA binary, source-to-binary provenance, MetaEditor build evidence or terminal runtime evidence is recorded here.
 - The actual NOVA System Hub and AI Worker contracts require independent target-side verification.
-- Exact feature-branch head SHA, full changed-file manifest, review state and exact-head test results must be captured before import.
+- Exact feature-branch head SHA, final review state and exact-head test results must be captured before import. The changed-file manifest and per-file diff statistics are now recorded above.
 
 ## 6. Security and safety review
 
