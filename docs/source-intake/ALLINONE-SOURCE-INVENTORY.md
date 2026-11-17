@@ -55,8 +55,8 @@ Before acceptance:
 - Original `MTRADERS_AllInOne_v1_01` EA source and its claimed 30 modules have not been located in the inspected ALLINONE repository paths.
 - No MQL5 source tree has been verified in the target candidate.
 - No verified compiled EA binary, source-to-binary provenance, MetaEditor build evidence or terminal runtime evidence is recorded here.
-- The actual NOVA System Hub and AI Worker contracts require independent target-side verification.
-- Exact feature-branch head SHA, final review state and exact-head test results must be captured before import. The changed-file manifest and per-file diff statistics are now recorded above.
+- The actual NOVA System Hub and AI Worker contracts require independent target-side verification. The source PR references the existing development repository's Hub/Worker implementations; they are not present in the current NOVA v1 main tree.
+- Exact feature-branch head SHA is `e4e69ca620437f89e106dfb75db85a51a5e1acc4`. PR #1 remains open and Draft, with 21 commits, 6 changed files, no requested reviewers and no recorded completed exact-head offline test run. Its PR body explicitly says offline tests remain pending and no status checks were reported; absence of checks is not a pass. The changed-file manifest and per-file diff statistics are recorded above.
 
 ## 6. Security and safety review
 
@@ -71,3 +71,10 @@ Before acceptance:
 **Current decision: PARTIAL CANDIDATE / BLOCKED FOR IMPORT.**
 
 The feature-branch adapter is a plausible source component, but the full ALLINONE engine and original MQL5 EA are not evidenced. Next step is to capture the feature branch's exact head and changed-file manifest, inspect all tests and upstream contracts, obtain the original EA source, then port reviewed files into NOVA v1 under `allinone/` on a separate feature branch.
+
+
+## 8. Target repository baseline
+
+The NOVA v1 main tree at `ac1f1b22f84fd0676c6e1d49e49da2ad77423686` contains only `README.md` and six documentation files under `docs/`. No application runtime, package manifest, Python project manifest, MQL5 source, or CI workflow is present on that baseline. This confirms that the first integration must establish the product runtime as well as import reviewed components.
+
+A GitHub code search for the exact name `MTRADERS_AllInOne_v1_01` returned no results in the connected account's searchable repositories. This does not prove the EA source does not exist elsewhere; its original source location is still required before the EA migration phase.
