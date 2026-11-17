@@ -7,20 +7,23 @@
 
 ## Product boundary
 
-NOVA v1.0 is a separate product repository. The canonical development repository remains
-[`vutting895/VOOM_SYSTEM-NOVA-AI`](https://github.com/vutting895/VOOM_SYSTEM-NOVA-AI).
-The two repositories have independent branches, CI, release tags, deployment configuration,
-secrets, and release evidence. Changes in the development repository do not automatically
-change this product repository.
+NOVA v1.0 is the **master product repository** for the unified NOVA + ALLINONE monorepo.
+The integration target is this repository:
+[`vutting895/VOOM_SYSTEM-NOVA-AI-ver.1.0`](https://github.com/vutting895/VOOM_SYSTEM-NOVA-AI-ver.1.0).
 
-Only source code and assets that are COMPLETE in the development repository and have reproducible,
-inspectable test evidence may be imported. Do not copy the whole development repository,
-unverified work-in-progress, mock UI data, fabricated metrics, credentials, or environment files.
+The earlier development repository [`vutting895/VOOM_SYSTEM-NOVA-AI`](https://github.com/vutting895/VOOM_SYSTEM-NOVA-AI)
+remains an upstream source and provenance reference only; it is not the master repository for the
+unified product. ALLINONE source repositories are also preserved as read-only provenance/rollback
+references after accepted components are imported here. This repository owns the unified product
+architecture, shared contracts, release evidence, and future product releases.
 
-The daily operating process is to inspect the canonical development repository, identify completed
-work relevant to this product plan, independently verify its implementation and test evidence, and
-bring accepted components directly into this product repository. Incomplete or failing work remains
-in the development repository and is not imported.
+Only complete, reviewed components with reproducible, inspectable test evidence may be imported.
+Do not bulk-copy an upstream repository or import unverified work-in-progress, mock UI data,
+fabricated metrics, credentials, environment files, or sample secrets.
+
+All integration work is performed on feature branches and proposed through pull requests. Do not
+commit directly to `main`, merge, deploy, provision paid resources, alter production secrets, or run
+database migrations without separate explicit authorization.
 
 ## Product scope
 
